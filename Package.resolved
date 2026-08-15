@@ -1,0 +1,15 @@
+{
+  "originHash" : "558e6c8fd81152492a6d1f21c063972754010fa99bcacf2ae7cb761b99a1304f",
+  "pins" : [
+    {
+      "identity" : "cmdarglibcore",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ouser4629/CmdArgLibCore.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "fdc959f1d30d49dfe37f4af9d14fbddc711dc245"
+      }
+    }
+  ],
+  "version" : 3
+}
