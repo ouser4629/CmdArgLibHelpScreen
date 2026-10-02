@@ -30,8 +30,7 @@ extension HelpScreen {
         helpScreenElements: [ShowElement],
         context: RunContext )
     {
-        var expander = context.showMacroExpander
-        expander.callNames = callNames
+        let expander = ShowMacroExpander(from: context.showMacroExpander, with: callNames)
         self.expander = expander
         self.callNames = callNames
         self.context = context
