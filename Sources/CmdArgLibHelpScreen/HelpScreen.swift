@@ -110,7 +110,10 @@ extension HelpScreen {
                     newChunks.append(newChunk)
                 }
             }
-            let extraIndent = (newChunks.first?.count ?? 1) + 1  // wraps under first parameter
+            var extraIndent = (newChunks.first?.count ?? 1) + 1  // wraps under first parameter
+            if withoutCallNames {
+                extraIndent = 2
+            }
             let header = firsLineCompleted ? "" : synopsisHeader
             let textBlock = TextChunks(header: header, chunks: newChunks, extraIndent: extraIndent)
             foramattedSynopsisLines.append(textBlock.description)
