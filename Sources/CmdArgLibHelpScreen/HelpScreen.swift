@@ -65,8 +65,9 @@ extension HelpScreen {
             case .linesBlock(var linesBlock):
                 linesBlock.expandShowMacros(using: expander)
                 sections.append(linesBlock.description)
-            case .synopsisDef(let synopsisHeader, let synopsisLines):
-                let lines = makeSynopsisSectionFor(synopsisHeader, and: synopsisLines, errorMessages: &errorMessages)
+            case .synopsisDef(let synopsisHeader, let synopsisLines, let withoutCallNames):
+                let lines = makeSynopsisSectionFor(
+                    synopsisHeader, and: synopsisLines, withoutCallNames: withoutCallNames,errorMessages: &errorMessages)
                 sections += lines
             }
         }
@@ -86,7 +87,10 @@ extension HelpScreen {
     ///
     /// Each spec is <label>:<type>[=]. If "=" is specified the dummy will have a default value. The label an type follow the usual rules
     func makeSynopsisSectionFor(
-        _ synopsisHeader: String, and synopsisLines: [SynopsisLine], errorMessages: inout [String]) -> [String]
+        _ synopsisHeader: String,
+        and synopsisLines: [SynopsisLine],
+        withoutCallNames: Bool = false,
+        errorMessages: inout [String]) -> [String]
     {
         var errorMessages: [String] = []
         var foramattedSynopsisLines: [String] = []
@@ -94,6 +98,9 @@ extension HelpScreen {
         for rawLine in synopsisLines {
             let lineParameters = synopsisLineParameters(in: rawLine, for: context, errorMessages: &errorMessages)
             var newChunks = callNames
+            if withoutCallNames {
+                newChunks = []
+            }
             let (shortFlagsChunk, remainingParameters) = getPackedShortFlagChunk(for: lineParameters)
             if let shortFlagsChunk {
                 newChunks.append(shortFlagsChunk)
