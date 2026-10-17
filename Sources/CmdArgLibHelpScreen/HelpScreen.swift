@@ -68,10 +68,11 @@ extension HelpScreen {
                 linesBlock.expandShowMacros(using: expander)
                 sections.append(linesBlock.description)
             case .synopsisDef(let synopsisHeader, let synopsisLines):
-                if synopsisSectionEncountered {
-                    errorMessages.append("More than one synopsis section encountered in help screen layout")
-                    continue
-                }
+// FIXME: Show let this happen?
+//                if synopsisSectionEncountered {
+//                    errorMessages.append("More than one synopsis section encountered in help screen layout")
+//                    continue
+//                }
                 synopsisSectionEncountered = true
                 let lines = makeSynopsisSectionFor(synopsisHeader, and: synopsisLines, errorMessages: &errorMessages)
                 sections += lines
